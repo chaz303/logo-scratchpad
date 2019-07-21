@@ -3,12 +3,14 @@
     <title>Logo Test</title>
   </head>
   <body>
-    <canvas></canvas>
+    <canvas id="logoCanvas"></canvas>
   </body>
   <script>
+    let logoCanvas = document.getElementById("logoCanvas");
+    let logoContext = logoCanvas.getContext("2d");
     const cellCount = 20;
-    const cellHeight = 4;
-    const cellWidth = 6;
+    const cellHeight = 14;
+    const cellWidth = 24;
     const cellVertSpace = 2;
     const colSpace = 4;
     let cellColor;
@@ -29,12 +31,13 @@
 
     // draw columns
     for (let i = 0; i < colCount; i++) {
+      console.log("column count", i);
       drawColumn(colArray[i], i);
     }
 
     function drawColumn(colHeight, colNumber) {
       let horizontalOffset = colNumber * (cellWidth + colSpace);
-      for (let j = 0; j < colArray[i]; j++) {
+      for (let j = 0; j < colHeight; j++) {
         switch (j) {
           case j < Math.floor((cellCount - 2) / 2):
             cellColor = "green";
@@ -46,7 +49,8 @@
             cellColor = "red";
         }
         let verticalOffset = j * (cellHeight + cellVertSpace);
-        // draw rectangle
+        logoContext.fillStyle = cellColor;
+        logoContext.fillRect(horizontalOffset, 5, cellWidth, cellHeight);
       }
     }
   </script>
