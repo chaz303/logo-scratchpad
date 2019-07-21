@@ -18,7 +18,7 @@
     let logoCanvas = document.getElementById("logoCanvas");
     let logoContext = logoCanvas.getContext("2d");
     const cellCount = 16;
-    const cellHeight = 5;
+    const cellHeight = 4;
     const cellWidth = 16;
     const cellVertSpace = 2;
     const colSpace = 2;
@@ -37,18 +37,20 @@
       2,
       cellCount
     ];
+    let specArray = [0, cellCount, cellCount, cellCount, 0, 0, 0, 0, 0, 0];
 
     // draw columns
     for (let i = 0; i < colCount; i++) {
       console.log("column count", i);
       drawColumn(colArray[i], i);
+      drawSpecial(specArray[i], i);
     }
 
     function drawColumn(colHeight, colNumber) {
       let horizontalOffset = colNumber * (cellWidth + colSpace);
       for (let j = 0; j < colHeight; j++) {
         switch (true) {
-          case j < Math.floor((cellCount - 2) / 2):
+          case j < Math.floor(((cellCount - 2) * 3) / 4):
             cellColor = "green";
             break;
           case j < cellCount - 2:
@@ -68,6 +70,34 @@
           cellWidth,
           cellHeight
         );
+      }
+    }
+    function drawSpecial(colHeight, colNumber) {
+      let horizontalOffset = colNumber * (cellWidth + colSpace);
+      for (let j = 0; j < colHeight; j++) {
+        switch (true) {
+          case j < Math.floor((cellCount - 2) / 2):
+            cellColor = "green";
+            break;
+          case j < cellCount - 2:
+            cellColor = "yellow";
+            break;
+          default:
+            cellColor = "red";
+        }
+        console.log(j, cellColor, Math.floor((cellCount - 2) / 2));
+        let verticalOffset =
+          cellCount * (cellHeight + cellVertSpace) -
+          j * (cellHeight + cellVertSpace);
+        logoContext.fillStyle = cellColor;
+        if (j >= colHeight - 2) {
+          logoContext.fillRect(
+            horizontalOffset,
+            verticalOffset,
+            cellWidth,
+            cellHeight
+          );
+        }
       }
     }
   </script>
