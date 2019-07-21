@@ -1,6 +1,15 @@
 <html>
   <head>
     <title>Logo Test</title>
+    <style>
+      body {
+        background: #dddddd;
+      }
+      #logoCanvas {
+        width: 600px;
+        height: 300px;
+      }
+    </style>
   </head>
   <body>
     <canvas id="logoCanvas"></canvas>
@@ -8,11 +17,11 @@
   <script>
     let logoCanvas = document.getElementById("logoCanvas");
     let logoContext = logoCanvas.getContext("2d");
-    const cellCount = 20;
-    const cellHeight = 14;
-    const cellWidth = 24;
+    const cellCount = 16;
+    const cellHeight = 5;
+    const cellWidth = 16;
     const cellVertSpace = 2;
-    const colSpace = 4;
+    const colSpace = 2;
     let cellColor;
 
     let colCount = 10;
@@ -24,7 +33,7 @@
       0,
       cellCount,
       2,
-      Math.floor(cellCount / 2),
+      Math.ceil(cellCount / 2),
       2,
       cellCount
     ];
@@ -38,7 +47,7 @@
     function drawColumn(colHeight, colNumber) {
       let horizontalOffset = colNumber * (cellWidth + colSpace);
       for (let j = 0; j < colHeight; j++) {
-        switch (j) {
+        switch (true) {
           case j < Math.floor((cellCount - 2) / 2):
             cellColor = "green";
             break;
@@ -48,9 +57,17 @@
           default:
             cellColor = "red";
         }
-        let verticalOffset = j * (cellHeight + cellVertSpace);
+        console.log(j, cellColor, Math.floor((cellCount - 2) / 2));
+        let verticalOffset =
+          cellCount * (cellHeight + cellVertSpace) -
+          j * (cellHeight + cellVertSpace);
         logoContext.fillStyle = cellColor;
-        logoContext.fillRect(horizontalOffset, 5, cellWidth, cellHeight);
+        logoContext.fillRect(
+          horizontalOffset,
+          verticalOffset,
+          cellWidth,
+          cellHeight
+        );
       }
     }
   </script>
