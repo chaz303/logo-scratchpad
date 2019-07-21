@@ -1,33 +1,53 @@
-drawlogo
+<html>
+  <head>
+    <title>Logo Test</title>
+  </head>
+  <body>
+    <canvas></canvas>
+  </body>
+  <script>
+    const cellCount = 20;
+    const cellHeight = 4;
+    const cellWidth = 6;
+    const cellVertSpace = 2;
+    const colSpace = 4;
+    let cellColor;
 
-canvas
+    let colCount = 10;
+    let colArray = [
+      cellCount,
+      2,
+      2,
+      2,
+      0,
+      cellCount,
+      2,
+      Math.floor(cellCount / 2),
+      2,
+      cellCount
+    ];
 
-const cellCount = 20;
-const cellHeight = 4;
-const cellWidth = 6;
-const cellVertSpace = 2;
-const colSpace = 4;
-let cellColor;
+    // draw columns
+    for (let i = 0; i < colCount; i++) {
+      drawColumn(colArray[i], i);
+    }
 
-let colCount = 10;
-let colArray = [cellCount, 2, 2, 2, 0, cellCount, 2, Math.floor(cellCount/2), 2, cellCount];
-
-// draw columns
-for (let i = 0; i < colCount; i++){
-    drawColumn(colArray[i], i);
-}
-
-function drawColumn (colHeight, colNumber) {
-    let horizontalOffset = colNumber * (cellWidth + colSpace);
-    for (let j = 0; j < colArray[i]; j++){
-        switch(j) {
-            case (j < Math.floor((cellCount - 2) / 2)): cellColor = "green";
+    function drawColumn(colHeight, colNumber) {
+      let horizontalOffset = colNumber * (cellWidth + colSpace);
+      for (let j = 0; j < colArray[i]; j++) {
+        switch (j) {
+          case j < Math.floor((cellCount - 2) / 2):
+            cellColor = "green";
             break;
-            case (j < cellCount - 2): cellColor = "yellow";
+          case j < cellCount - 2:
+            cellColor = "yellow";
             break;
-            default: cellColor = "red";
+          default:
+            cellColor = "red";
         }
         let verticalOffset = j * (cellHeight + cellVertSpace);
         // draw rectangle
+      }
     }
-}
+  </script>
+</html>
